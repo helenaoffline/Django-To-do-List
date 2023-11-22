@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block header %}Registro{% endblock %}
+
+{% block content %}
+<form method="post" action="{% url 'todocreate' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create</button>
+</form>
+
+    <h2>Just do It</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Todo</th>
+                <th>Group</th>
+                <th>Done</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for newtodo in newtodos %}
+                <tr>
+                    <td>{{ newtodo.name_todo }}</td>
+                    <td>{{ newtodo.group }}</td>
+                    <td>
+                        {% if newtodo.done %}
+                            <p>sim</p>
+                        {% else %}
+                            <p>Não</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form method="post" action="{% url 'tododelete' pk=newtodo.pk %}">
+                            {% csrf_token %}
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                    <td>
+                        <button><a href="{% url 'todoupdate' pk=newtodo.pk %}">Update</a></button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block header %}Registro{% endblock %}
+
+{% block content %}
+
+<h1>Atualiza</h1>
+    <form method="post" action="{% url 'todoupdate' pk=newtodo.pk %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update</button>
+    </form>
+{% endblock %}

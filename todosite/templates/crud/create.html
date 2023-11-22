@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block header %}Registro{% endblock %}
+
+{% block content %}
+
+<h1>Criando</h1>
+    <form method="post" action="{% url 'todocreate' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Criar NewTodo</button>
+    </form>
+{% endblock %}
